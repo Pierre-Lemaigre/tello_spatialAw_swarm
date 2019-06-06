@@ -30,6 +30,14 @@ class Coordinates:
         """
         return "Coordinates : | X : {} | Y : {} | Z : {} |".format(self.x_axis, self.y_axis, self.z_axis)
 
+    def __repr__(self):
+        """Equivalent function than __str__ for the object in python interpreter.
+
+        :return: Representation of the Coordinates Object.
+        :rtype: str.
+        """
+        return "X : {} | Y : {} | Z : {}".format(self.x_axis, self.y_axis, self.z_axis)
+
 
 class Speed:
     """Class for representation of speed states.
@@ -57,7 +65,15 @@ class Speed:
         :rtype: str.
 
         """
-        return "Speed states (cm.s⁻¹): | X axis : {} | Y axis : {} | Z axis : {} |".format(self.x_speed, self.y_speed, self.z_speed)
+        return "Speed states (cm.s⁻¹): | X : {} | Y : {} | Z : {} |".format(self.x_speed, self.y_speed, self.z_speed)
+
+    def __repr__(self):
+        """Equivalent function than __str__ for the object in python interpreter.
+
+        :return: Representation of the Speed Object.
+        :rtype: str.
+        """
+        return "X : {} | Y : {} | Z : {}".format(self.x_speed, self.y_speed, self.z_speed)
 
 
 class Velocity:
@@ -86,3 +102,11 @@ class Velocity:
 
         """
         return "Velocity states (cm.s⁻²)| X : {} | Y : {} | Z : {} |".format(self.x_velocity, self.y_velocity, self.z_velocity)
+
+    def __repr__(self):
+        """Equivalent function than __str__ for the object in python interpreter.
+
+        :return: Representation of the Coordinates Object.
+        :rtype: str.
+        """
+        return "X : {} | Y : {} | Z : {}".format(self.x_velocity, self.y_velocity, self.z_velocity)

@@ -11,8 +11,8 @@ This module contain
 
 """
 import socket
-from direction import Direction, Clockwise
-from space import Coordinates, Speed, Velocity
+from .direction import Direction, Clockwise
+from .space import Coordinates, Speed, Velocity
 
 
 class Tello:
@@ -113,6 +113,13 @@ class Tello:
         """Command the drone to hover in air.
         """
         self.send_command('stop')
+
+    def keep_drone_alive(self):
+        """Tello drone fall asleep if during 15s they didn't receive a command
+        This function "ping" the drone and act according to the response (notify programm if drone down)
+        Also i'm using this function to check on battery level, so if battery to low, drone down to.
+        """
+        self.send_command('battery?')
 
 
 class Tstate:

@@ -1,11 +1,10 @@
-"""This Module is a swarm creation around Tello class
-This is used to recognize Tello connected to the Asus box
+"""This module is the controller of the application, use
+model classes and functions and interact with the view
 """
-import multiprocessing as mp
-from ipaddress import ip_network
-from network import search_for_tello
-from tello import Tello
-import sys
+from model.tello import Tello
+from model.network import construct_network
+from os import sys
+import re
 
 
 def construct_tello(tello_swarm):
@@ -20,22 +19,16 @@ def construct_tello(tello_swarm):
     return tello_construct, white_addresses
 
 
-def main(tello_address_checked):
-    """Main function of the programm
-    Normally useless in python to do this, but multiprocessing librairie
-    put restrictions
-    """
-    drones, blank_ip_addresses = construct_tello(tello_address_checked)
-    tello_drones = dict()
-    for tello in drones:
-        tello_drones[tello.tello_adr[0]] = [tello, ]
+def main(network_addresse):
+    print("hello")
+    sub_networks = construct_network()
+    drones, blank_ip_addresses = construct_tello(sub_networks)
 
 
 if __name__ == "__main__":
-    tello_address_checked = list()
-    network = ip_network('192.168.1.0/24')
-    if len(sys.argv) >= 2:
-        network = ip_network(sys.argv[1])
-    pool = mp.Pool(mp.cpu_count()*8)
-    tello_address_checked = pool.map(func=search_for_tello, iterable=network.hosts())
-    print(tello_address_checked)
+    regex = r"^((\d|1\d{1,2}|2[0-4]\d|25[0-5])\.){3}(\d|1\d{1,2}|2[0-4]\d|25[0-5])$"
+    if len(sys.argv) >= 2 and (re.match(regex, str(sys.argv[1]))):
+        network_addresse = sys.argv[1]
+        main(network_addresse)
+    else:
+        exit("Error, network addresses not valid")
