@@ -8,7 +8,13 @@ import re
 import queue
 
 
-def main(network_address):
+def live_list_reload(drones=dict(), state_queue=queue.Queue()):
+    while not state_queue.empty():
+        state_tuple = state_queue.get()
+        drones[state_tuple[0]] = 2
+
+
+def main(network_address):    
     tested_ip_addresses = construct_network()
     drones, blank_ip_addresses = construct_tello(tested_ip_addresses)
     drones_states_queue = queue.Queue()

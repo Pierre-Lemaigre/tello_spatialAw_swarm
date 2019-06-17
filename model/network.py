@@ -1,7 +1,7 @@
 """This module search for Tello connection on the given network
 """
 from subprocess import check_output, STDOUT, TimeoutExpired, CalledProcessError
-from tello import Tello
+from tello import Tello, Tstate
 import socket
 import multiprocessing as mp
 from ipaddress import ip_network
@@ -55,12 +55,12 @@ def construct_network(network_adress='192.168.1.0/24'):
 
 
 def construct_tello(tello_swarm):
-    tello_construct = list()
+    tello_construct = dict()
     white_addresses = list()
     if isinstance(tello_swarm, list):
         for ip_address, state in tello_swarm:
             if isinstance(state, int):
-                tello_construct.append([Tello(local_port=state, tello_ip=ip_address), state])
+                tello_construct[ip_address] = [Tello(local_port=state), Tstate()]
             else:
                 white_addresses.append((ip_address, state))
     return tello_construct, white_addresses

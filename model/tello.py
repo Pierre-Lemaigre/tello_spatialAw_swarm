@@ -32,12 +32,13 @@ class Tello:
          :type tello_port: str.
 
         """
+        self.local_port = local_port
         # Initilization of some parameters usefull for the future
         self.tello_adr = (tello_ip, tello_port)
 
         # Creation of the socket to send commands to the Tello drone
         self.socket_command = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.socket_command.bind((local_ip, local_port))
+        self.socket_command.bind((local_ip, self.local_port))
 
     def __del__(self):
         """Destructor of the class.
