@@ -14,7 +14,7 @@ def live_list_reload(drones=dict(), state_queue=queue.Queue()):
         drones[state_tuple[0]] = 2
 
 
-def main(network_address):    
+def main(network_address):
     tested_ip_addresses = construct_network()
     drones, blank_ip_addresses = construct_tello(tested_ip_addresses)
     drones_states_queue = queue.Queue()
